@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>集团数字化与 AI 赋能方案 · 多角色版 — 沙厂 / 压铸 / 抛光 / 铜厂</title>
+<style>
+  :root{
+    --bg:#0d1420; --bg2:#111b2c; --card:#17233a; --card2:#1c2b47;
+    --line:#263757; --txt:#e8eef8; --mut:#9db0cc; --dim:#6b7f9f;
+    --blue:#3d8bff; --cyan:#2fd4c4; --gold:#f0b545; --red:#ff6b6b; --green:#43d68a; --purple:#9b7bff; --orange:#ff9a5c;
+    --radius:14px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:linear-gradient(180deg,#0b111c 0%,#0d1420 40%,#0b111c 100%);color:var(--txt);
+    font-family:"PingFang SC","Microsoft YaHei","Helvetica Neue",Arial,sans-serif;line-height:1.75;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+  section{padding:64px 0;border-bottom:1px solid rgba(38,55,87,.5)}
+  .kicker{display:inline-block;font-size:12px;letter-spacing:3px;color:var(--cyan);border:1px solid rgba(47,212,196,.35);
+    padding:4px 14px;border-radius:99px;margin-bottom:18px;background:rgba(47,212,196,.06)}
+  h1{font-size:40px;line-height:1.3;font-weight:700}
+  h2{font-size:28px;margin-bottom:10px;font-weight:700}
+  h3{font-size:19px;margin-bottom:10px}
+  .sub{color:var(--mut);font-size:15px;max-width:840px;margin-bottom:36px}
+  p{color:var(--mut);font-size:14.5px}
+  strong,b{color:var(--txt)}
+  /* hero */
+  .hero{padding:96px 0 72px;text-align:center;border-bottom:1px solid rgba(38,55,87,.5)}
+  .hero h1{background:linear-gradient(90deg,#fff,#9cc4ff 60%,#2fd4c4);-webkit-background-clip:text;background-clip:text;color:transparent;margin:18px 0 20px}
+  .hero .lead{color:var(--mut);max-width:780px;margin:0 auto 40px;font-size:16px}
+  .pills{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+  .pill{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 22px;font-size:14px;color:var(--mut);min-width:190px}
+  .pill b{display:block;font-size:20px;color:var(--txt);margin-bottom:2px}
+  /* grid/cards */
+  .grid{display:grid;gap:18px}
+  .g2{grid-template-columns:repeat(2,1fr)}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g4{grid-template-columns:repeat(4,1fr)}
+  @media(max-width:900px){.g3,.g4{grid-template-columns:repeat(2,1fr)}.g2{grid-template-columns:1fr}}
+  @media(max-width:560px){.g3,.g4{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px;transition:.25s}
+  .card:hover{border-color:rgba(61,139,255,.5);transform:translateY(-3px)}
+  .card h3{display:flex;align-items:center;gap:10px}
+  .ico{width:38px;height:38px;flex:0 0 38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:19px;background:rgba(61,139,255,.14)}
+  ul.clean{list-style:none;margin-top:10px}
+  ul.clean li{font-size:13.5px;color:var(--mut);padding:6px 0 6px 20px;position:relative;border-bottom:1px dashed rgba(38,55,87,.6)}
+  ul.clean li:last-child{border-bottom:none}
+  ul.clean li::before{content:"▸";position:absolute;left:2px;color:var(--blue)}
+  ul.clean li b{color:var(--txt)}
+  .tag{display:inline-block;font-size:11px;padding:2px 9px;border-radius:99px;font-weight:400}
+  .t-blue{background:rgba(61,139,255,.15);color:#7fb2ff}.t-cyan{background:rgba(47,212,196,.13);color:var(--cyan)}
+  .t-gold{background:rgba(240,181,69,.14);color:var(--gold)}.t-red{background:rgba(255,107,107,.13);color:var(--red)}
+  .t-green{background:rgba(67,214,138,.13);color:var(--green)}.t-purple{background:rgba(155,123,255,.14);color:#b9a3ff}
+  /* role cards */
+  .role{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-bottom:22px}
+  .role-head{display:flex;align-items:center;gap:16px;padding:20px 26px;background:var(--card2);border-bottom:1px solid var(--line)}
+  .role-head .ava{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;flex:0 0 52px}
+  .role-head .who h3{margin:0}
+  .role-head .who .motto{font-size:13px;color:var(--dim)}
+  .role-head .tag{margin-left:auto}
+  .role-body{display:grid;grid-template-columns:1fr 1fr;gap:0}
+  @media(max-width:820px){.role-body{grid-template-columns:1fr}}
+  .role-col{padding:22px 26px}
+  .role-col+.role-col{border-left:1px solid var(--line)}
+  @media(max-width:820px){.role-col+.role-col{border-left:none;border-top:1px solid var(--line)}}
+  .role-col h4{font-size:13px;letter-spacing:2px;margin-bottom:12px}
+  .now h4{color:var(--red)}.future h4{color:var(--green)}
+  /* chat */
+  .chat{background:var(--bg2);border:1px solid var(--line);border-radius:var(--radius);padding:20px;margin-top:14px}
+  .msg{display:flex;gap:10px;margin-bottom:14px;max-width:92%}
+  .msg .m-ava{width:32px;height:32px;flex:0 0 32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;background:var(--card2);border:1px solid var(--line)}
+  .msg .bub{border-radius:12px;padding:10px 15px;font-size:13.5px;line-height:1.7}
+  .msg.user{margin-left:auto;flex-direction:row-reverse}
+  .msg.user .bub{background:rgba(61,139,255,.16);border:1px solid rgba(61,139,255,.35);color:#cfe2ff;border-top-right-radius:4px}
+  .msg.ai .bub{background:var(--card);border:1px solid var(--line);color:var(--mut);border-top-left-radius:4px}
+  .msg.ai .bub b{color:var(--txt)}
+  .msg.ai .bub .hl{color:var(--gold)}
+  /* scene */
+  .scene{background:rgba(155,123,255,.06);border:1px solid rgba(155,123,255,.25);border-radius:var(--radius);padding:18px 22px;margin-top:14px;font-size:13.5px;color:#c9bbf0}
+  .scene b{color:#e2d8ff}
+  .scene .sc-tag{font-size:11px;letter-spacing:2px;color:var(--purple);display:block;margin-bottom:6px}
+  /* arch */
+  .arch{display:flex;flex-direction:column;gap:12px}
+  .layer{display:grid;grid-template-columns:150px 1fr;gap:14px;align-items:stretch}
+  @media(max-width:700px){.layer{grid-template-columns:1fr}}
+  .layer .lab{background:var(--card2);border:1px solid var(--line);border-radius:10px;display:flex;align-items:center;justify-content:center;
+    text-align:center;font-size:14px;font-weight:600;padding:14px;color:var(--cyan)}
+  .layer .boxs{display:flex;flex-wrap:wrap;gap:10px}
+  .layer .bx{flex:1;min-width:150px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-size:13px;color:var(--mut)}
+  .layer .bx b{display:block;color:var(--txt);font-size:13.5px;margin-bottom:2px}
+  /* table */
+  table{width:100%;border-collapse:collapse;font-size:13.5px;background:var(--card);border-radius:var(--radius);overflow:hidden;border:1px solid var(--line)}
+  th{background:var(--card2);color:var(--txt);text-align:left;padding:13px 16px;font-weight:600;border-bottom:1px solid var(--line)}
+  td{padding:12px 16px;color:var(--mut);border-bottom:1px solid rgba(38,55,87,.5);vertical-align:top}
+  tr:last-child td{border-bottom:none}
+  .ok{color:var(--green)}.warn{color:var(--gold)}.bad{color:var(--red)}
+  /* bars */
+  .bars{display:flex;flex-direction:column;gap:14px;margin-top:8px}
+  .bar-row{display:grid;grid-template-columns:110px 1fr 110px;gap:12px;align-items:center;font-size:13px;color:var(--mut)}
+  .bar-track{height:22px;background:var(--bg2);border-radius:6px;overflow:hidden;border:1px solid var(--line)}
+  .bar-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--blue),var(--cyan))}
+  /* roadmap */
+  .road{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  @media(max-width:900px){.road{grid-template-columns:1fr}}
+  .phase{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:26px;position:relative;overflow:hidden}
+  .phase::before{content:"";position:absolute;top:0;left:0;right:0;height:4px}
+  .p1::before{background:var(--blue)}.p2::before{background:var(--gold)}.p3::before{background:var(--green)}
+  .phase .ph{font-size:12px;letter-spacing:2px;color:var(--dim)}
+  .phase h3{margin:6px 0 4px}
+  .phase .time{font-size:13px;color:var(--cyan);margin-bottom:14px}
+  /* kpi */
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px;text-align:center}
+  .kpi .num{font-size:30px;font-weight:700;background:linear-gradient(90deg,var(--cyan),var(--blue));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .kpi .cap{font-size:13px;color:var(--mut);margin-top:6px}
+  .flow{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:18px 0}
+  .step{background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:10px 16px;font-size:13px;color:var(--txt)}
+  .step small{display:block;color:var(--dim);font-size:11.5px}
+  .to{color:var(--dim);font-size:16px}
+  footer{padding:44px 0 60px;text-align:center;color:var(--dim);font-size:13px}
+  .note{background:rgba(240,181,69,.07);border:1px solid rgba(240,181,69,.3);border-radius:var(--radius);padding:18px 22px;font-size:13.5px;color:#e8cd9a;margin-top:26px}
+  .note b{color:#ffe1ad}
+  .pain{border-left:3px solid var(--red);background:linear-gradient(90deg,rgba(255,107,107,.07),transparent);border-radius:0 var(--radius) var(--radius) 0;padding:22px 24px}
+  .pain h3{color:#ffb3b3}
+  .arrow{text-align:center;color:var(--dim);font-size:22px;margin:14px 0}
+  .solve{border-left:3px solid var(--green);background:linear-gradient(90deg,rgba(67,214,138,.06),transparent);border-radius:0 var(--radius) var(--radius) 0;padding:22px 24px}
+  .solve h3{color:#8fe6bb}
+  /* persona strip */
+  .personas{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:36px}
+  @media(max-width:900px){.personas{grid-template-columns:repeat(2,1fr)}}
+  .persona{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;transition:.25s}
+  .persona:hover{border-color:rgba(47,212,196,.5);transform:translateY(-3px)}
+  .persona .p-ava{width:56px;height:56px;margin:0 auto 12px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px}
+  .persona h3{font-size:16px;margin-bottom:4px}
+  .persona p{font-size:12.5px}
+  .a-blue{background:rgba(61,139,255,.14)}.a-gold{background:rgba(240,181,69,.14)}.a-green{background:rgba(67,214,138,.13)}
+  .a-purple{background:rgba(155,123,255,.14)}.a-orange{background:rgba(255,154,92,.14)}.a-cyan{background:rgba(47,212,196,.13)}
+  .a-red{background:rgba(255,107,107,.13)}.a-gray{background:rgba(157,176,204,.12)}
+</style>
+</head>
+<body>
+
+<!-- ================= HERO ================= -->
+<div class="hero wrap">
+  <span class="kicker">数字化 × AI 赋能 · 多角色推演版</span>
+  <h1>八个角色，一场变革<br>让每个角色都「演一遍」数字化的自己</h1>
+  <p class="lead">集团旗下 <strong style="color:#fff">沙厂 · 压铸 · 抛光 · 铜厂</strong> 四家分公司。
+  本方案不讲抽象概念，而是模拟 <b style="color:#7fb2ff">董事长、财务总管、四位厂长、业务经理、老客户</b> 八个角色，
+  推演每个角色今天的困境、数字化后的工作方式，以及他们之间的对话如何被改变。</p>
+  <div class="pills">
+    <div class="pill"><b>8 个</b>角色视角全程推演</div>
+    <div class="pill"><b>4 家</b>工厂一场一策</div>
+    <div class="pill"><b>T+1</b>经营数据每日可见</div>
+    <div class="pill"><b>3 阶段</b>18 个月落地路线</div>
+  </div>
+</div>
+
+<!-- ================= 1. 角色登场 ================= -->
+<section class="wrap" id="cast">
+  <span class="kicker">01 · 角色登场</span>
+  <h2>先认识这盘棋里的八个角色</h2>
+  <p class="sub">数字化不是装软件，而是改变每个角色每天的工作。方案是否成立，就看这八个角色的"剧本"是否都变好了。</p>
+  <div class="personas">
+    <div class="persona"><div class="p-ava a-blue">👔</div><h3>董事长</h3><p>想知道四厂真实经营，却只能在月底看二手报表</p></div>
+    <div class="persona"><div class="p-ava a-gold">🧮</div><h3>财务总管</h3><p>总管集团财务，月底催表、对账、合并报表焦头烂额</p></div>
+    <div class="persona"><div class="p-ava a-orange">⛏️</div><h3>沙厂厂长</h3><p>管过磅、车队、堆场，手写磅单说不清道不明</p></div>
+    <div class="persona"><div class="p-ava a-cyan">🏭</div><h3>压铸厂长</h3><p>管机台排产、模具、良品率，订单一多就乱</p></div>
+    <div class="persona"><div class="p-ava a-green">✨</div><h3>抛光厂长</h3><p>管计件工人、返工率、粉尘环保，全靠人盯</p></div>
+    <div class="persona"><div class="p-ava a-purple">🔶</div><h3>铜厂厂长</h3><p>管金属平衡、品位、铜价波动，盈亏算不清</p></div>
+    <div class="persona"><div class="p-ava a-red">💼</div><h3>业务经理</h3><p>难招难留，客户在个人微信里，新人从零开始</p></div>
+    <div class="persona"><div class="p-ava a-gray">🤝</div><h3>老客户</h3><p>下单靠打电话，对账等月底，感受不到被重视</p></div>
+  </div>
+
+  <div class="grid g3">
+    <div class="card pain">
+      <h3>角色之间的「断点」</h3>
+      <ul class="clean">
+        <li>董事长 ↔ 厂长：信息靠<b>月报单向上行</b>，滞后且可粉饰</li>
+        <li>财务总管 ↔ 四厂：月底<b>催数据、对口径</b>，重复劳动</li>
+        <li>业务经理 ↔ 公司：客户资产<b>私有化</b>，人走客失</li>
+        <li>老客户 ↔ 企业：服务<b>依赖个人</b>，体验不稳定</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>断点的根因</h3>
+      <ul class="clean">
+        <li>信息靠<b>人传人</b>：报表、微信、口头</li>
+        <li>经营靠<b>人盯人</b>：厂长盯车间、董事长猜厂长</li>
+        <li>增长靠<b>人海战术</b>：拓客完全依赖个人能人</li>
+        <li>客户靠<b>个人关系</b>：公司层面没有客户资产</li>
+      </ul>
+    </div>
+    <div class="card solve">
+      <h3>解法总纲</h3>
+      <ul class="clean">
+        <li>用<b>数据直采</b>替代汇报：设备、单据、流水自己说话</li>
+        <li>用 <b>AI 参谋</b>替代盯人：自动分析、自动预警、自动验证</li>
+        <li>用<b>系统+SOP</b>替代个人英雄：获客能力组织化</li>
+        <li>用 <b>CRM</b> 沉淀客户资产：从"业务员的客"变"公司的客"</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 2. 角色剧本 ================= -->
+<section class="wrap" id="scripts">
+  <span class="kicker">02 · 多角色剧本推演</span>
+  <h2>八个角色：今天的困境 vs 数字化后的日常</h2>
+  <p class="sub">每个角色配一段"现在 / 未来"对照和一场模拟戏。这些场景就是方案验收时的验收标准。</p>
+
+  <!-- 董事长 -->
+  <div class="role">
+    <div class="role-head">
+      <div class="ava a-blue">👔</div>
+      <div class="who"><h3>角色一：董事长</h3><div class="motto">"四个厂到底谁管得好？我不想再猜了。"</div></div>
+      <span class="tag t-blue">决策层</span>
+    </div>
+    <div class="role-body">
+      <div class="role-col now">
+        <h4>▍今天</h4>
+        <ul class="clean">
+          <li>每月 10 号才看到上月报表，<b>问题发现即晚期</b></li>
+          <li>报表由各厂管理者自报，<b>口径不一、无法横向比较</b></li>
+          <li>想追问细节，要等厂长再"回去查查"</li>
+          <li>对经营好坏的判断，很大程度靠<b>对厂长个人的信任</b></li>
+        </ul>
+      </div>
+      <div class="role-col future">
+        <h4>▍数字化后</h4>
+        <ul class="clean">
+          <li>每天早 8 点，手机收到<b>四厂昨日经营摘要</b>（收入/发货/回款/能耗）</li>
+          <li>驾驶舱四厂<b>同口径对标</b>，排名、达成率、趋势一屏看清</li>
+          <li>任何指标可<b>一键穿透</b>到单据、到客户、到订单</li>
+          <li>异常<b>自动推送</b>，比厂长的电话来得更早</li>
+        </ul>
+      </div>
+    </div>
+    <div style="padding:0 26px 24px">
+      <div class="chat">
+        <div class="msg user"><div class="m-ava">👔</div><div class="bub">抛光厂这个月毛利怎么掉了 3 个点？</div></div>
+        <div class="msg ai"><div class="m-ava">🤖</div><div class="bub">拆解如下：① <b>返工率</b>从 4.1% 升到 <span class="hl">7.8%</span>，贡献 -1.9pct，主因是 3 号产线新员工占比过半；② 研磨材料涨价贡献 -0.7pct；③ 低价单占比上升贡献 -0.5pct。建议：优先排查 3 号产线技能培训。需要我调出返工明细单吗？</div></div>
+        <div class="msg user"><div class="m-ava">👔</div><div class="bub">铜厂报的上月产量，和用电量对得上吗？</div></div>
+        <div class="msg ai"><div class="m-ava">🤖</div><div class="bub">已做交叉验证：按吨耗基准推算，申报产量对应电耗应为 <b>61.2 万度</b>，实际电表直采 <span class="hl">58.9 万度</span>，偏差 3.8%，<b>在合理区间（±5%）</b>。另外银行流水与账面回款核对一致，无异常。✅</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 财务总管 -->
+  <div class="role">
+    <div class="role-head">
+      <div class="ava a-gold">🧮</div>
+      <div class="who"><h3>角色二：财务总管</h3><div class="motto">"月底那几天，我是在催报表，不是在管财务。"</div></div>
+      <span class="tag t-gold">集团财务</span>
+    </div>
+    <div class="role-body">
+      <div class="role-col now">
+        <h4>▍今天</h4>
+        <ul class="clean">
+          <li>四套账四个口径，<b>合并报表靠 Excel 手工拼</b></li>
+          <li>业务数据和财务数据两张皮，<b>对不上时找不到原因</b></li>
+          <li>应收超期靠翻台账，发现时往往已超 60 天</li>
+          <li>老板临时要数据，全集团加班凑数</li>
+        </ul>
+      </div>
+      <div class="role-col future">
+        <h4>▍数字化后</h4>
+        <ul class="clean">
+          <li>业务单据<b>自动生成财务凭证</b>，业财同源，天然对得上</li>
+          <li>四厂统一科目与指标字典，<b>合并报表一键生成</b></li>
+          <li>月结从 10 天压缩到 <b>2 天</b>，AI 自动出具月度经营分析初稿</li>
+          <li>应收账龄实时看板，<b>超期 30 天自动提醒到责任人</b></li>
+        </ul>
+      </div>
+    </div>
+    <div style="padding:0 26px 24px">
+      <div class="scene"><span class="sc-tag">场景 · 每月 2 日上午</span>
+      财务总管打开系统，四厂<b>月报已自动合并完毕</b>，AI 已生成《月度经营分析报告》初稿：各厂达成率、异常科目、应收风险提示一目了然。她花一小时复核、补充判断，下午就发给了董事会——<b>而以前，这个数据要 10 号才能凑齐</b>。</div>
+    </div>
+  </div>
+
+  <!-- 沙厂厂长 -->
+  <div class="role">
+    <div class="role-head">
+      <div class="ava a-orange">⛏️</div>
+      <div class="who"><h3>角色三：沙厂厂长</h3><div class="motto">"一天几百车砂，手写磅单，说不漏谁信？"</div></div>
+      <span class="tag t-gold">分公司</span>
+    </div>
+    <div class="role-body">
+      <div class="role-col now">
+        <h4>▍今天</h4>
+        <ul class="clean">
+          <li>手写磅单 + 人工登记，<b>错漏、作弊都防不住</b></li>
+          <li>卖了多少砂、库存多少，<b>月底盘点才知道</b></li>
+          <li>车队调度靠电话吼，空驶、排队严重</li>
+          <li>环保检查来了临时抱佛脚</li>
+        </ul>
+      </div>
+      <div class="role-col future">
+        <h4>▍数字化后</h4>
+        <ul class="clean">
+          <li><b>无人值守地磅</b>：车牌识别 + 自动称重 + 拍照留档，每车自动入账</li>
+          <li>日出砂量、出货量、堆场库存<b>实时可查</b></li>
+          <li>车辆 GPS 调度，排队、空驶一眼可见</li>
+          <li>环保数据在线监测，<b>合规报告自动生成</b></li>
+        </ul>
+      </div>
+    </div>
+    <div style="padding:0 26px 24px">
+      <div class="chat">
+        <div class="msg ai"><div class="m-ava">🤖</div><div class="bub">⚠️ 【沙厂异常提醒】今日 14:32，车牌 粤B·D8837 过磅毛重与 15:05 出场皮重比对，<b>净重 2.1 吨，与该车历史平均载重 18 吨严重不符</b>，疑似异常过磅，已自动保存过磅抓拍照片，请核查。</div></div>
+        <div class="msg user"><div class="m-ava">⛏️</div><div class="bub">收到，我去监控室调录像。</div></div>
+      </div>
+      <div class="scene"><span class="sc-tag">场景 · 以前月底对不上的账</span>
+      过去每个月，磅房登记数、财务收款数、堆场盘点数三本账<b>永远对不齐</b>，厂长说不清，董事长起疑心。现在每一车从进闸到出闸全程系统留痕，<b>三本账变成一本账</b>——厂长反而成了数据最硬的厂长。</div>
+    </div>
+  </div>
+
+  <!-- 压铸厂长 -->
+  <div class="role">
+    <div class="role-head">
+      <div class="ava a-cyan">🏭</div>
+      <div class="who"><h3>角色四：压铸厂长</h3><div class="motto">"订单一多就乱：哪台机在做哪个单，全靠我脑子记。"</div></div>
+      <span class="tag t-gold">分公司</span>
+    </div>
+    <div class="role-body">
+      <div class="role-col now">
+        <h4>▍今天</h4>
+        <ul class="clean">
+          <li>排产靠 Excel + 经验，<b>插单一次全盘乱</b></li>
+          <li>机台停了多久、为什么停，<b>没人记录</b></li>
+          <li>模具什么时候该保养，靠老师傅感觉</li>
+          <li>不良品原因靠事后扯皮，<b>重复踩坑</b></li>
+        </ul>
+      </div>
+      <div class="role-col future">
+        <h4>▍数字化后</h4>
+        <ul class="clean">
+          <li><b>智能排产</b>：订单、机台、模具、交期自动匹配，插单一键重排</li>
+          <li>机台稼动率自动采集，<b>停机原因扫码上报</b></li>
+          <li>模具寿命计数，<b>到期自动提醒保养</b></li>
+          <li>不良品 AI 归因：按产品/机台/班次/模具找规律</li>
+        </ul>
+      </div>
+    </div>
+    <div style="padding:0 26px 24px">
+      <div class="chat">
+        <div class="msg user"><div class="m-ava">🏭</div><div class="bub">客户临时加 5000 件壳体，周五要，能接吗？</div></div>
+        <div class="msg ai"><div class="m-ava">🤖</div><div class="bub">可以接。方案：4 号机（当前订单周三完工）+ 7 号机夜班承接，模具 M-12 寿命剩余 <b>8200 模次</b>，够用但完工后需立即保养。代价：老订单 A-2201 顺延 <span class="hl">1 天</span>，该单客户交期缓冲有 3 天，<b>无违约风险</b>。确认后我一键重排并通知班组。</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 抛光厂长 -->
+  <div class="role">
+    <div class="role-head">
+      <div class="ava a-green">✨</div>
+      <div class="who"><h3>角色五：抛光厂长</h3><div class="motto">"八十多个计件工人，工资、返工、粉尘，天天救火。"</div></div>
+      <span class="tag t-gold">分公司</span>
+    </div>
+    <div class="role-body">
+      <div class="role-col now">
+        <h4>▍今天</h4>
+        <ul class="clean">
+          <li>计件靠<b>纸质工单</b>，工人月底对工资必吵架</li>
+          <li>谁抛的、谁检的、谁返的工，<b>追溯不到人</b></li>
+          <li>新员工上手慢，质量波动大</li>
+          <li>粉尘、安监、环保台账<b>手工造</b>，检查就紧张</li>
+        </ul>
+      </div>
+      <div class="role-col future">
+        <h4>▍数字化后</h4>
+        <ul class="clean">
+          <li><b>扫码计件</b>：每件产品扫工位码，件数、工价、工资实时可见，工人自己手机查</li>
+          <li>质检绑定工位与批次，<b>返工一键追溯到人</b>，不良率按人按线排名</li>
+          <li>AI 视觉检测辅助表面质检，<b>漏检率下降</b></li>
+          <li>粉尘浓度在线监测 + 安监台账自动生成</li>
+        </ul>
+      </div>
+    </div>
+    <div style="padding:0 26px 24px">
+      <div class="scene"><span class="sc-tag">场景 · 发薪日</span>
+      以前发薪日，办公室门口排长队对工资，一单对不上就翻几天前的纸质工单。现在工人打开小程序：今天抛了 142 件、合格 139 件、计件工资 <b>¥486</b>，返工的 3 件附质检照片。<b>工资争议下降 90%</b>，厂长终于不用当"判官"。</div>
+      <div class="chat">
+        <div class="msg ai"><div class="m-ava">🤖</div><div class="bub">📊 【抛光厂周报】本周综合良品率 <b>95.2%</b>（↑0.8pct）。提示：B 线周三至周五返工集中于<b>划痕类缺陷（占 62%）</b>，与研磨带批次 G-0718 使用时间重合，建议停用该批次并复检库存。新人工组人均日产为老组的 54%，较上月提升 12pct，<b>培训进度正常</b>。</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 铜厂厂长 -->
+  <div class="role">
+    <div class="role-head">
+      <div class="ava a-purple">🔶</div>
+      <div class="who"><h3>角色六：铜厂厂长</h3><div class="motto">"铜价一天一个样，我这厂是赚是赔，月底才敢看。"</div></div>
+      <span class="tag t-gold">分公司</span>
+    </div>
+    <div class="role-body">
+      <div class="role-col now">
+        <h4>▍今天</h4>
+        <ul class="clean">
+          <li>铜价波动大，<b>库存敞口和价差损益算不清</b></li>
+          <li>投料品位、产出品位靠化验单，<b>金属平衡月月有"亏吨"</b></li>
+          <li>回收率高低直接影响盈亏，但<b>只能事后看</b></li>
+          <li>接单时凭感觉报价，<b>怕接亏了也怕报丢了</b></li>
+        </ul>
+      </div>
+      <div class="role-col future">
+        <h4>▍数字化后</h4>
+        <ul class="clean">
+          <li>金属平衡表<b>每日自动生成</b>：投入、产出、回收率、损耗一目了然</li>
+          <li>库存吨数 × 实时铜价 = <b>敞口损益每日可视</b></li>
+          <li>AI 报价助手：按实时铜价 + 加工费 + 历史成交<b>给出报价区间</b></li>
+          <li>套保敏感性试算：铜价 ±5% 对利润影响一键测算</li>
+        </ul>
+      </div>
+    </div>
+    <div style="padding:0 26px 24px">
+      <div class="chat">
+        <div class="msg ai"><div class="m-ava">🤖</div><div class="bub">⚠️ 【铜厂风险提示】当前原料+半成品库存合计 <b>386 吨</b>，已锁定价格 210 吨，<b>价格敞口 176 吨</b>。沪铜今日跌 1.8%，敞口浮亏约 <span class="hl">¥21.4 万</span>。若明日继续下行超 1%，建议对其中 100 吨做套保锁价，测算明细已生成，需要查看吗？</div></div>
+        <div class="msg user"><div class="m-ava">🔶</div><div class="bub">把测算发我，顺便看下本周金属平衡。</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 业务经理 -->
+  <div class="role">
+    <div class="role-head">
+      <div class="ava a-red">💼</div>
+      <div class="who"><h3>角色七：业务经理</h3><div class="motto">"公司嫌我贵，我怕客户跟着我走——大家都累。"</div></div>
+      <span class="tag t-red">增长线</span>
+    </div>
+    <div class="role-body">
+      <div class="role-col now">
+        <h4>▍今天</h4>
+        <ul class="clean">
+          <li>客户在<b>个人微信</b>里，离职=带走客户，公司不敢放手培养</li>
+          <li>报价翻旧聊天记录，新人没人带、<b>一年都出不了师</b></li>
+          <li>拓新客靠喝酒跑关系，<b>线索全凭运气</b></li>
+          <li>跟单、对账、催款占用大半时间，<b>真正谈客户的时间很少</b></li>
+        </ul>
+      </div>
+      <div class="role-col future">
+        <h4>▍数字化后</h4>
+        <ul class="clean">
+          <li>客户全进 CRM，沟通打卡 30 秒，<b>客户是公司的，业绩是自己的</b>——提成规则写进系统，谁也不吃亏</li>
+          <li><b>AI 副驾</b>：自动生成报价建议、回访话术、客户 30 秒简报</li>
+          <li>AI 每周推送<b>潜客清单</b>（招投标、新开工项目、同行客户动态）</li>
+          <li>对账单、合同初稿自动生成，<b>时间还给谈客户</b></li>
+        </ul>
+      </div>
+    </div>
+    <div style="padding:0 26px 24px">
+      <div class="chat">
+        <div class="msg ai"><div class="m-ava">🤖</div><div class="bub">💼 【你的今日销售简报】① <b>宏盛五金</b>（A类）已 <span class="hl">34 天未下单</span>（历史平均间隔 18 天），流失风险高，建议今日回访，话术已备好；② 新客户线索 3 条：东莞某新能源配件厂发布<b>压铸件采购招标</b>，匹配度高，详情见附件；③ 骏达的报价单按当前铜价建议区间 <b>¥68.5–70.2/kg</b>。</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 老客户 -->
+  <div class="role">
+    <div class="role-head">
+      <div class="ava a-gray">🤝</div>
+      <div class="who"><h3>角色八：老客户（采购负责人）</h3><div class="motto">"合作五年了，除了催款电话，你们还记得我什么？"</div></div>
+      <span class="tag t-green">客户端</span>
+    </div>
+    <div class="role-body">
+      <div class="role-col now">
+        <h4>▍今天</h4>
+        <ul class="clean">
+          <li>下单、催货、问进度都要<b>打电话找同一个业务员</b></li>
+          <li>对账单月底才来，<b>对不上再扯皮</b></li>
+          <li>业务员一换，<b>一切从头再来</b>，价格、习惯全要重讲</li>
+          <li>感觉不到"老客户"和"新客户"有什么区别</li>
+        </ul>
+      </div>
+      <div class="role-col future">
+        <h4>▍数字化后</h4>
+        <ul class="clean">
+          <li>客户端小程序：<b>订单进度、发货状态、对账单实时自查</b></li>
+          <li>年度协议客户享受<b>优先排产</b>，交期更稳</li>
+          <li>无论谁对接，对方都知道你的历史订单、偏好和账期——<b>换人不换服务</b></li>
+          <li>用量达标自动触发<b>年度返利</b>，忠诚有回报</li>
+        </ul>
+      </div>
+    </div>
+    <div style="padding:0 26px 24px">
+      <div class="scene"><span class="sc-tag">场景 · 一次换帅</span>
+      跟了五年的业务员离职了。老客户本以为又要"重新磨合"，结果新对接人第一次来电就说："王总，您常购的压铸支架上月那批已到安全库存线下，要不要按老价格先排 2000 件？"——<b>因为系统记得一切</b>。这就是客户资产公司化带给客户的体感。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 3. 总体蓝图 ================= -->
+<section class="wrap" id="blueprint">
+  <span class="kicker">03 · 总体蓝图</span>
+  <h2>支撑八个角色的「1 中台 + 4 应用 + 1 AI 大脑」</h2>
+  <p class="sub">自下而上五层：数据从车间、磅房、账本自动流上来，决策和服务从系统里自动长出来。</p>
+  <div class="arch">
+    <div class="layer">
+      <div class="lab">⑤ 决策层<br>董事长</div>
+      <div class="boxs">
+        <div class="bx"><b>集团经营驾驶舱</b>一屏看四厂：收入/利润/现金流/订单/库存/能耗</div>
+        <div class="bx"><b>AI 经营参谋</b>自然语言问数、自动归因、报表真实性交叉验证</div>
+        <div class="bx"><b>风险雷达</b>应收超期、毛利异动、价格敞口、流失客户自动告警</div>
+      </div>
+    </div>
+    <div class="layer">
+      <div class="lab">④ 应用层<br>四大系统</div>
+      <div class="boxs">
+        <div class="bx"><b>业财一体化平台</b>业务单据自动生成财务凭证，业财同源</div>
+        <div class="bx"><b>BI 报表平台</b>统一指标口径，四厂横向对标</div>
+        <div class="bx"><b>CRM 客户经营</b>客户资产公司化、分层经营、流失预警</div>
+        <div class="bx"><b>AI 销售引擎</b>线索挖掘、报价辅助、销售 SOP</div>
+      </div>
+    </div>
+    <div class="layer">
+      <div class="lab">③ 中台层<br>数据中台</div>
+      <div class="boxs">
+        <div class="bx"><b>数据直采</b>地磅 / 机台 / 电表 / 粉尘仪 / 单据 / 银行流水自动汇集</div>
+        <div class="bx"><b>统一口径</b>集团指标字典：同一指标只有一个算法</div>
+        <div class="bx"><b>主数据管理</b>客户、供应商、物料、科目统一编码</div>
+      </div>
+    </div>
+    <div class="layer">
+      <div class="lab">② 业务层<br>四家分公司</div>
+      <div class="boxs">
+        <div class="bx"><b>沙厂</b>无人值守地磅、车辆 GPS、堆场库存、环保监测</div>
+        <div class="bx"><b>压铸</b>机台稼动率、模具寿命、良品率、智能排产</div>
+        <div class="bx"><b>抛光</b>扫码计件、质量追溯、视觉检测、粉尘监测</div>
+        <div class="bx"><b>铜厂</b>金属平衡、品位化验、价格敞口、AI 报价</div>
+      </div>
+    </div>
+    <div class="layer">
+      <div class="lab">① 基础层<br>数据源头</div>
+      <div class="boxs">
+        <div class="bx"><b>设备/传感器</b>地磅、电表、机台 PLC、粉尘仪</div>
+        <div class="bx"><b>业务单据</b>销售单、采购单、工单、出入库单</div>
+        <div class="bx"><b>财务数据</b>凭证、应收应付、银行流水、发票</div>
+      </div>
+    </div>
+  </div>
+  <div class="note">💡 关键设计原则：<b>数据不经人手</b>。称重由地磅自动记录、产量由机台自动采集、计件由扫码自动生成、凭证由单据自动生成——厂长从"报数的人"变成"对数据负责的人"，董事长看到的是原始事实而非加工后的汇报。</div>
+</section>
+
+<!-- ================= 4. 驾驶舱 ================= -->
+<section class="wrap" id="dashboard">
+  <span class="kicker">04 · 核心载体</span>
+  <h2>董事长的「经营驾驶舱」（示意数据）</h2>
+  <p class="sub">八个角色的剧本，最终都汇聚到这一块屏上。一屏总览 → 四厂穿透 → 异常推送。</p>
+  <div class="grid g4" style="margin-bottom:24px">
+    <div class="kpi"><div class="num">¥ 1.28亿</div><div class="cap">本月集团营收 · 同比 <span class="ok">+6.2%</span></div></div>
+    <div class="kpi"><div class="num">18.4%</div><div class="cap">综合毛利率 · 环比 <span class="bad">-1.1pct</span> ⚠</div></div>
+    <div class="kpi"><div class="num">¥ 3,460万</div><div class="cap">应收账款 · 超期 <span class="bad">¥420万</span> ⚠</div></div>
+    <div class="kpi"><div class="num">176吨</div><div class="cap">铜厂价格敞口 · 浮亏 <span class="warn">¥21万</span> ⚠</div></div>
+  </div>
+  <div class="card" style="margin-bottom:24px">
+    <h3>四家分公司横向对标（本月毛利 vs 预算达成）</h3>
+    <div class="bars">
+      <div class="bar-row"><span>沙厂</span><div class="bar-track"><div class="bar-fill" style="width:86%"></div></div><span>毛利 22% · 达成 96%</span></div>
+      <div class="bar-row"><span>压铸</span><div class="bar-track"><div class="bar-fill" style="width:92%"></div></div><span>毛利 19% · 达成 102%</span></div>
+      <div class="bar-row"><span>抛光</span><div class="bar-track"><div class="bar-fill" style="width:64%;background:linear-gradient(90deg,var(--gold),var(--red))"></div></div><span>毛利 11% · 达成 74% ⚠</span></div>
+      <div class="bar-row"><span>铜厂</span><div class="bar-track"><div class="bar-fill" style="width:78%"></div></div><span>毛利 15% · 达成 88%</span></div>
+    </div>
+    <p style="margin-top:14px;font-size:13px">同一指标同一算法，四厂<b>第一次可以放在同一把尺子上比较</b>。"哪个厂长管得好"从主观印象变成客观数据；点击任何一格可穿透到单据明细。</p>
+  </div>
+  <div class="grid g3">
+    <div class="card">
+      <h3><span class="ico">📡</span>数据直采堵水分</h3>
+      <ul class="clean">
+        <li>沙厂每车过磅自动入账，杜绝手写磅单</li>
+        <li>压铸机台运行数据直采，稼动率无法虚报</li>
+        <li>抛光扫码计件，产量工资同源</li>
+        <li>铜厂化验单电子化，金属平衡自动核算</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3><span class="ico">⚡</span>T+1 日报代月报</h3>
+      <ul class="clean">
+        <li>每天早 8 点四厂昨日摘要推送董事长手机</li>
+        <li>收入、发货、回款、良品率、能耗每日刷新</li>
+        <li>月报系统自动生成，厂长只做解读不做搬运</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3><span class="ico">🚨</span>异常自动预警</h3>
+      <ul class="clean">
+        <li>毛利率下滑超 2pct → AI 自动归因推送</li>
+        <li>应收超期 30 天 → 提醒到具体责任人</li>
+        <li>铜价敞口超限 → 套保建议自动测算</li>
+        <li>客户下单间隔异常 → 流失预警到销售</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 5. 分厂一场一策 ================= -->
+<section class="wrap" id="plants">
+  <span class="kicker">05 · 分厂落地</span>
+  <h2>一场一策：四种业务形态，四套数字化重点</h2>
+  <p class="sub">同一个中台，不同的采集重点与 AI 场景。不搞一刀切，每厂抓住"最能说明经营真相"的数据点。</p>
+  <table>
+    <tr><th style="width:10%">分厂</th><th style="width:16%">业务形态特点</th><th style="width:26%">数据直采重点</th><th style="width:24%">核心看板指标</th><th>AI 应用场景</th></tr>
+    <tr>
+      <td><b>沙厂</b></td>
+      <td>以量取胜 · 车辆进出高频 · 现金交易多</td>
+      <td>无人值守地磅、车牌识别、车辆 GPS、堆场盘点、环保监测</td>
+      <td>日出砂量、出货量、单车毛利、车队周转、库存堆位</td>
+      <td>过磅图像比对防作弊；需求预测指导开采节奏</td>
+    </tr>
+    <tr>
+      <td><b>压铸</b></td>
+      <td>订单驱动 · 多品种 · 设备与模具是核心资产</td>
+      <td>机台 PLC 运行数据、模具模次计数、质检记录、工单流转</td>
+      <td>稼动率、良品率、订单准交率、排产达成率</td>
+      <td>智能排产与插单重排；不良品归因；模具保养预测</td>
+    </tr>
+    <tr>
+      <td><b>抛光</b></td>
+      <td>人力密集 · 计件工资 · 质量依赖人 · 环保压力大</td>
+      <td>扫码计件、质检绑定工位、粉尘浓度、安监台账</td>
+      <td>人均日产、良品率、返工率、工资达成、粉尘达标率</td>
+      <td>AI 视觉表面检测；返工缺陷聚类归因；新人培训进度追踪</td>
+    </tr>
+    <tr>
+      <td><b>铜厂</b></td>
+      <td>资金密集 · 价格敏感 · 金属平衡是生命线</td>
+      <td>品位化验单电子化、投入产出称重、库存盘点、行情接口</td>
+      <td>金属回收率、加工毛利、价格敞口、库存吨数</td>
+      <td>金属平衡每日核算；敞口损益预警与套保测算；AI 报价区间</td>
+    </tr>
+  </table>
+</section>
+
+<!-- ================= 6. 增长引擎 ================= -->
+<section class="wrap" id="growth">
+  <span class="kicker">06 · 增长线</span>
+  <h2>业务增长引擎 + 老客经营：破解「业务经理难招」的死结</h2>
+  <p class="sub">思路转变：与其重金赌一个金牌业务经理，不如用「AI + 系统 + SOP」把获客能力<b>组织化、可复制化</b>——普通销售也能打出 80 分，公司也再不怕人走客失。</p>
+  <h3 style="margin-bottom:14px">增长飞轮</h3>
+  <div class="flow">
+    <div class="step">AI 找线索<small>招投标/新项目/行业库</small></div>
+    <span class="to">→</span>
+    <div class="step">内容建信任<small>行业内容+在线询盘</small></div>
+    <span class="to">→</span>
+    <div class="step">SOP 促成交<small>标准流程+AI 副驾</small></div>
+    <span class="to">→</span>
+    <div class="step">CRM 养客户<small>分层经营+流失预警</small></div>
+    <span class="to">→</span>
+    <div class="step">四厂互导流<small>压铸客户→抛光→铜材</small></div>
+  </div>
+  <div class="grid g3" style="margin-top:26px">
+    <div class="card">
+      <h3><span class="ico">🎯</span>AI 线索挖掘<span class="tag t-cyan">拓新</span></h3>
+      <ul class="clean">
+        <li>监测招投标网站，匹配"砂石/压铸件/抛光加工/铜材"需求自动推送</li>
+        <li>监测区域<b>新开工项目</b>（工地用砂）、<b>新设工厂</b>（设备要压铸件）</li>
+        <li>四厂客户资源集团层面合规打通：<b>买压铸件的客户，可能需要抛光，也可能需要铜材</b>——这是集团独有的交叉销售优势</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3><span class="ico">🧭</span>销售 SOP + AI 教练<span class="tag t-gold">育人</span></h3>
+      <ul class="clean">
+        <li>把最好业务员的打法沉淀为标准流程：破冰→需求→报价→逼单→回款</li>
+        <li>每环节系统给话术模板与检查清单，<b>新人 3 个月出师</b></li>
+        <li>AI 复盘沟通记录给出改进建议</li>
+        <li>销售漏斗可视化：线索→商机→报价→成交，卡点一目了然</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3><span class="ico">🔄</span>老客分层经营<span class="tag t-green">留旧</span></h3>
+      <ul class="clean">
+        <li>按"采购额×毛利×回款"自动分 A/B/C 层，A 类配专属 SOP</li>
+        <li>AI 流失预警：下单间隔变长、单笔量下滑、比价增多 → 提前 30 天预警</li>
+        <li>沉睡客户自动进激活名单，生成回访任务</li>
+        <li>用量达标客户自动触发年度协议与返利</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 7. 路线图 ================= -->
+<section class="wrap" id="roadmap">
+  <span class="kicker">07 · 实施路线</span>
+  <h2>三阶段路线图：先看见 → 再看懂 → 后增长</h2>
+  <p class="sub">小步快跑，每 3~6 个月出一个看得见的成果。建议先选数据基础较好的压铸厂试点，跑通后复制。</p>
+  <div class="road">
+    <div class="phase p1">
+      <div class="ph">PHASE 1</div>
+      <h3>数据打底 · 经营透明</h3>
+      <div class="time">第 0 – 4 个月</div>
+      <ul class="clean">
+        <li>统一四厂<b>指标口径与科目/物料/客户编码</b></li>
+        <li>业务单据线上化（进销存 + 财务对接）</li>
+        <li>沙厂无人地磅、压铸机台采集试点</li>
+        <li>抛光扫码计件上线（工资争议立竿见影）</li>
+        <li>集团驾驶舱 1.0：日报 + 四厂对标</li>
+        <li>CRM 上线，客户资料全部入库</li>
+      </ul>
+      <p style="margin-top:12px"><b>里程碑：</b>董事长每天手机看四厂真实数据。</p>
+    </div>
+    <div class="phase p2">
+      <div class="ph">PHASE 2</div>
+      <h3>AI 参谋 · 风险雷达</h3>
+      <div class="time">第 4 – 9 个月</div>
+      <ul class="clean">
+        <li>AI 经营参谋上线：自然语言问数、月报自动点评</li>
+        <li><b>交叉验证引擎</b>：业务/财务/设备三账核对</li>
+        <li>铜厂金属平衡日核算 + 价格敞口预警</li>
+        <li>抛光 AI 视觉质检试点、返工归因</li>
+        <li>客户分层 + 流失预警模型上线</li>
+      </ul>
+      <p style="margin-top:12px"><b>里程碑：</b>异常比厂长汇报更早到董事会。</p>
+    </div>
+    <div class="phase p3">
+      <div class="ph">PHASE 3</div>
+      <h3>增长引擎 · 组织升级</h3>
+      <div class="time">第 9 – 18 个月</div>
+      <ul class="clean">
+        <li>AI 线索挖掘 + 内容获客体系运转</li>
+        <li>销售 SOP + AI 副驾全面推广</li>
+        <li>四厂客户资源打通，<b>交叉销售</b>机制落地</li>
+        <li>压铸智能排产、客户小程序（查单/对账）上线</li>
+        <li>厂长绩效与系统指标全面挂钩</li>
+      </ul>
+      <p style="margin-top:12px"><b>里程碑：</b>获客不再依赖个别能人。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 8. 配套机制 ================= -->
+<section class="wrap" id="org">
+  <span class="kicker">08 · 配套机制</span>
+  <h2>技术是半篇文章，机制是另外半篇</h2>
+  <p class="sub">数字化项目八成败在组织而不是软件。四条机制必须与技术建设同步推进。</p>
+  <div class="grid g2">
+    <div class="card"><h3><span class="ico">👤</span>设集团「数字化负责人」</h3>
+      <p>由董事会直接授权，协调四厂推进；<b>数据录入的及时性与准确性纳入厂长考核</b>——谁迟报、谁造假，系统留痕、考核说话。</p></div>
+    <div class="card"><h3><span class="ico">📏</span>数据口径"立法"</h3>
+      <p>发布《集团经营指标字典》：毛利怎么算、产量以哪个环节为准、超期从哪天算起，<b>全集团只有一个定义</b>。口径不统一，对标就是空话。</p></div>
+    <div class="card"><h3><span class="ico">🎓</span>考核激励跟着数据走</h3>
+      <p>厂长绩效从"董事长印象分"改为<b>"系统指标分"</b>；销售提成规则写进系统——客户归公司、业绩归个人，让干得好的人被看见，也消除业务经理的顾虑。</p></div>
+    <div class="card"><h3><span class="ico">🔐</span>数据权限与安全</h3>
+      <p>分级授权：厂长看本厂、财务总管看全盘、董事长看全局；客户资料导出留痕审计，<b>既放开数据又管住数据</b>。</p></div>
+  </div>
+</section>
+
+<!-- ================= 9. 预期收益 ================= -->
+<section class="wrap" id="roi">
+  <span class="kicker">09 · 预期收益</span>
+  <h2>12–18 个月后，八个角色各自的收获</h2>
+  <div class="grid g4" style="margin-top:30px">
+    <div class="kpi"><div class="num">30天→1天</div><div class="cap">董事长看经营的延迟</div></div>
+    <div class="kpi"><div class="num">10天→2天</div><div class="cap">财务总管的月结周期</div></div>
+    <div class="kpi"><div class="num">3本→1本</div><div class="cap">沙厂的账（磅单/收款/盘点合一）</div></div>
+    <div class="kpi"><div class="num">-90%</div><div class="cap">抛光厂工资争议</div></div>
+    <div class="kpi"><div class="num">T+0</div><div class="cap">铜厂价格敞口可见性</div></div>
+    <div class="kpi"><div class="num">3个月</div><div class="cap">新销售上手周期（原 12 个月+）</div></div>
+    <div class="kpi"><div class="num">0</div><div class="cap">因人员离职流失的关键客户</div></div>
+    <div class="kpi"><div class="num">+15~25%</div><div class="cap">老客复购与四厂交叉销售贡献</div></div>
+  </div>
+  <div class="note">📌 最大的收益不在数字里：董事会与厂长之间的<b>信任结构被重建</b>——厂长知道上面看得见一切，精力从"做报表"转向"做经营"；董事长从"防着下面"转向"赋能下面"；业务经理从"互相防备"变成"规则透明、各赚各的"。</div>
+</section>
+
+<footer>
+  集团数字化与 AI 赋能整体方案 · 多角色推演版 —— 沙厂 / 压铸 / 抛光 / 铜厂<br>
+  建议启动方式：以压铸厂为 Phase 1 试点（数据基础好、见效直观），同步上线集团统一指标口径，跑通后复制到其余三厂。
+</footer>
+
+</body>
+</html>
