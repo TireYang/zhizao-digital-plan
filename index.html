@@ -540,9 +540,73 @@
   <div class="note">💡 关键设计原则：<b>数据不经人手</b>。称重由地磅自动记录、产量由机台自动采集、计件由扫码自动生成、凭证由单据自动生成——厂长从"报数的人"变成"对数据负责的人"，董事长看到的是原始事实而非加工后的汇报。</div>
 </section>
 
-<!-- ================= 4. 驾驶舱 ================= -->
+<!-- ================= 4. 与金蝶ERP的关系 ================= -->
+<section class="wrap" id="kingdee">
+  <span class="kicker">04 · 现状基础</span>
+  <h2>已上金蝶 ERP？正好——ERP 是地基，不是天花板</h2>
+  <p class="sub">集团已经上线金蝶 ERP，意味着订单、库存、财务核算已经线上化——这让本方案<b>实施更快、成本更低</b>。但 ERP 管的是"记录"，而董事会要的是"真相、预见、增长"，这三件事恰恰都在 ERP 的边界之外。<b>策略：对接而非替换，让 ERP 的既有投入被放大。</b></p>
+
+  <table style="margin-bottom:26px">
+    <tr><th style="width:34%">✅ 金蝶 ERP 已覆盖（不重复建设）</th><th>❌ ERP 覆盖不了（本方案补位）</th></tr>
+    <tr>
+      <td>
+        订单 / 采购 / 库存 / 财务核算 / 凭证<br>
+        <span style="font-size:12.5px">——业务的"记录层"已经数字化，单据不用再从纸上搬到线上</span>
+      </td>
+      <td>
+        <b>① 数据可信度</b>：ERP 数据仍是人录入的，可补录、可滞后、可修饰——董事长看到的依然是二手数据<br>
+        <b>② 车间级数据</b>：地磅称重、机台稼动、扫码计件、品位化验、粉尘监测——这些"经营真相"根本不在 ERP 里<br>
+        <b>③ 分析与预警</b>：ERP 出账不归因，不会告诉你"毛利为什么掉"，更不会提前预警<br>
+        <b>④ 客户与增长</b>：客户资产、销售 SOP、AI 线索挖掘——ERP 一概不管
+      </td>
+    </tr>
+  </table>
+
+  <h3 style="margin-bottom:14px">叠加架构：金蝶 ERP 成为数据中台的数据源之一</h3>
+  <div class="flow">
+    <div class="step">金蝶 ERP<small>订单 / 库存 / 凭证 / 应收应付</small></div>
+    <span class="to">＋</span>
+    <div class="step">车间 IoT 直采<small>地磅 / 机台 / 扫码 / 粉尘仪</small></div>
+    <span class="to">＋</div>
+    <div class="step">外部数据<small>铜价行情 / 银行流水 / 招投标</small></div>
+    <span class="to">→</span>
+    <div class="step">数据中台<small>统一口径 · 交叉验证</small></div>
+    <span class="to">→</span>
+    <div class="step">驾驶舱 / AI 参谋 / CRM<small>真相 · 预见 · 增长</small></div>
+  </div>
+
+  <div class="grid g3" style="margin-top:26px">
+    <div class="card">
+      <h3><span class="ico">🔌</span>对接而非替换<span class="tag t-blue">低成本</span></h3>
+      <ul class="clean">
+        <li>通过金蝶<b>开放 API / 数据库视图</b>定时抽取单据与凭证数据</li>
+        <li>金蝶继续管"记账"，新平台管"经营"，<b>各司其职</b></li>
+        <li>四厂若用的金蝶版本不同，<b>在中台层统一口径</b>即可，不折腾换系统</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3><span class="ico">🔍</span>交叉验证威力加倍<span class="tag t-red">风控</span></h3>
+      <ul class="clean">
+        <li>ERP 账面收入 × <b>地磅/机台直采的实物量</b> × 银行流水——三账互验</li>
+        <li>ERP 里的入库量 vs 地磅实际过磅量，<b>损耗与水分立刻现形</b></li>
+        <li>以前 AI 只能"听汇报"，现在是<b>"拿着 ERP 的账去对设备的事实"</b></li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3><span class="ico">🚀</span>已有 ERP 的额外红利<span class="tag t-green">提速</span></h3>
+      <ul class="clean">
+        <li>客户、物料、科目编码<b>已有基础</b>，主数据治理工作量减半</li>
+        <li>历史订单数据直接喂给 AI，<b>客户分层、流失预警第一天就有数据</b></li>
+        <li>Phase 1 工期可压缩：<b>4 个月 → 约 3 个月</b></li>
+      </ul>
+    </div>
+  </div>
+  <div class="note">📌 一句话回答"上了 ERP 还有没有业务空间"：<b>ERP 解决了"账记下来了"，但没解决"账是不是真的、为什么变差、下一单在哪"</b>——后三件事正是本方案的主战场，也是数字化投入从"成本中心"变成"增长引擎"的部分。</div>
+</section>
+
+<!-- ================= 5. 驾驶舱 ================= -->
 <section class="wrap" id="dashboard">
-  <span class="kicker">04 · 核心载体</span>
+  <span class="kicker">05 · 核心载体</span>
   <h2>董事长的「经营驾驶舱」（示意数据）</h2>
   <p class="sub">八个角色的剧本，最终都汇聚到这一块屏上。一屏总览 → 四厂穿透 → 异常推送。</p>
   <div class="grid g4" style="margin-bottom:24px">
@@ -593,7 +657,7 @@
 
 <!-- ================= 5. 分厂一场一策 ================= -->
 <section class="wrap" id="plants">
-  <span class="kicker">05 · 分厂落地</span>
+  <span class="kicker">06 · 分厂落地</span>
   <h2>一场一策：四种业务形态，四套数字化重点</h2>
   <p class="sub">同一个中台，不同的采集重点与 AI 场景。不搞一刀切，每厂抓住"最能说明经营真相"的数据点。</p>
   <table>
@@ -631,7 +695,7 @@
 
 <!-- ================= 6. 增长引擎 ================= -->
 <section class="wrap" id="growth">
-  <span class="kicker">06 · 增长线</span>
+  <span class="kicker">07 · 增长线</span>
   <h2>业务增长引擎 + 老客经营：破解「业务经理难招」的死结</h2>
   <p class="sub">思路转变：与其重金赌一个金牌业务经理，不如用「AI + 系统 + SOP」把获客能力<b>组织化、可复制化</b>——普通销售也能打出 80 分，公司也再不怕人走客失。</p>
   <h3 style="margin-bottom:14px">增长飞轮</h3>
@@ -678,7 +742,7 @@
 
 <!-- ================= 7. 路线图 ================= -->
 <section class="wrap" id="roadmap">
-  <span class="kicker">07 · 实施路线</span>
+  <span class="kicker">08 · 实施路线</span>
   <h2>三阶段路线图：先看见 → 再看懂 → 后增长</h2>
   <p class="sub">小步快跑，每 3~6 个月出一个看得见的成果。建议先选数据基础较好的压铸厂试点，跑通后复制。</p>
   <div class="road">
@@ -727,7 +791,7 @@
 
 <!-- ================= 8. 配套机制 ================= -->
 <section class="wrap" id="org">
-  <span class="kicker">08 · 配套机制</span>
+  <span class="kicker">09 · 配套机制</span>
   <h2>技术是半篇文章，机制是另外半篇</h2>
   <p class="sub">数字化项目八成败在组织而不是软件。四条机制必须与技术建设同步推进。</p>
   <div class="grid g2">
@@ -744,7 +808,7 @@
 
 <!-- ================= 9. 预期收益 ================= -->
 <section class="wrap" id="roi">
-  <span class="kicker">09 · 预期收益</span>
+  <span class="kicker">10 · 预期收益</span>
   <h2>12–18 个月后，八个角色各自的收获</h2>
   <div class="grid g4" style="margin-top:30px">
     <div class="kpi"><div class="num">30天→1天</div><div class="cap">董事长看经营的延迟</div></div>
